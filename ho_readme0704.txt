@@ -98,8 +98,21 @@ find /home/aicompetition12/Datasets/1.competition_trainset/1_dataset/ -maxdepth 
 find /home/aicompetition12/Datasets/1.competition_trainset/1_dataset/ -maxdepth 1 -type f -name '*.txt' | tail -n $(find /home/aicompetition12/Datasets/1.competition_trainset/1_dataset/ -maxdepth 1 -type f -name '*.txt' | wc -l | awk '{print int($1*0.2)}') | xargs -I {} mv {} /home/aicompetition12/Datasets/labels/val/
 
 cd unmanned_sales
-
+ssai_agpu-g=1
 
 python train.py --img 640 --batch 16 --epochs 100 --data data/dataset.yaml --cfg models/yolov5s.yaml --weights '' --name my_yolov5_model --device 0
 
+########################
+#1. 검증 데이터로 모델 평가
+#검증 데이터셋을 사용하여 모델의 성능을 평가할 수 있습니다. 다음 명령어를 사용하세요:
+python val.py --weights runs/train/my_yolov5_model/weights/best.pt --data data/dataset.yaml --img 640
+
+
+#2. 모델로 새로운 이미지 추론
+#모델을 사용하여 새로운 이미지에 대해 예측을 수행할 수 있습니다. 다음 명령어를 사용하세요:
+python detect.py --weights runs/train/my_yolov5_model/weights/best.pt --img 640 --conf 0.25 --source /path/to/your/images
+
+
+#3. 추론 결과 확인
+#추론 결과는 runs/detect/exp 디렉토리에 저장됩니다. 이 디렉토리에서 결과 이미지를 확인할 수 있습니다.
 
