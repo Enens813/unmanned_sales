@@ -116,3 +116,9 @@ python detect.py --weights runs/train/my_yolov5_model/weights/best.pt --img 640 
 #3. 추론 결과 확인
 #추론 결과는 runs/detect/exp 디렉토리에 저장됩니다. 이 디렉토리에서 결과 이미지를 확인할 수 있습니다.
 
+
+
+##########################
+현재(0708)모델은 precision은 매우 낮고, recall은 epoch 50정도에선 1에 가까움. -> 원인파악 필요
+
+
